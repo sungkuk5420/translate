@@ -4,7 +4,6 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/dist/css/default.css' />
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="/dist/js/userScript.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
@@ -12,5 +11,18 @@
         <div id="" class="title">
             welcome to Express
         </div>
+        <div id="" class="" data-langtext>
+            오늘은 공부를 했습니다.
+        </div>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <script src="/javascripts/userScript.js"></script>
+    <script>
+        $(document).ready(function(){
+            getDataBase(function(){
+                console.log(DBData);
+                allTextTranslate();
+            });
+        });
+  </script>
   </body>
 </html>
