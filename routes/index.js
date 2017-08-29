@@ -1,15 +1,12 @@
 var express = require('express');
 var router = express.Router();
-
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Express' });
 });
 
-
 // 네이버 Papago NMT API 예제
-var client_id = '';
-var client_secret = '';
+var client_id = 'vu8G4adE4oGZQHOrDH3C';
+var client_secret = '4_gCSpwtbz';
 // var query = "とりあえず終わる見込みがあり作業工数が発生しているものはStage設定済み（見積もり対象月の設定）。下記レポートはStageなし（見積もり予定がまだ立っていないもの）の一覧ですので共有させていただきます。";
 router.get('/translate', function (req, res) {
     console.log(req.query.text);
