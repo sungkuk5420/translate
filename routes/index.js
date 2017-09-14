@@ -10,11 +10,13 @@ var client_secret = '4_gCSpwtbz';
 // var query = "とりあえず終わる見込みがあり作業工数が発生しているものはStage設定済み（見積もり対象月の設定）。下記レポートはStageなし（見積もり予定がまだ立っていないもの）の一覧ですので共有させていただきます。";
 router.get('/translate', function (req, res) {
     console.log(req.query.text);
+    console.log(req.query.sendLang);
+    console.log(req.query.returnLang);
     var api_url = 'https://openapi.naver.com/v1/language/translate';
     var request = require('request');
     var options = {
       url: api_url,
-      form: {'source':'ko', 'target':'ja', 'text':req.query.text},
+      form: {'source':req.query.sendLang, 'target':req.query.returnLang, 'text':req.query.text},
     headers: {'X-Naver-Client-Id':client_id, 'X-Naver-Client-Secret': client_secret}
   };
   request.post(options, function (error, response, body) {
