@@ -45,6 +45,6 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-app.listen(3000, function () {
-  console.log('http://127.0.0.1:3000/translate app listening on port 3000!');
+app.listen(4000, function () {
+  console.log('http://127.0.0.1:4000/translate app listening on port 4000!');
 });
