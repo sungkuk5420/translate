@@ -8,12 +8,13 @@ var config = {
 firebase.initializeApp(config);
 
 var BASELANG = 'ko',
-    DATABASE = undefined;
+    DATABASE = undefined,
+    defaultPath = '/';
 
 var getDataBase = function (cb) {
     return new Promise(function (resolve, reject) {
         DATABASE = firebase.database();
-        DATABASE.ref().on('value', function (data) {
+        DATABASE.ref(defaultPath).on('value', function (data) {
             var database = data.val();
             DBData = Object.keys(database).map(function (data) {
                 return {
@@ -60,7 +61,7 @@ function changeDBText(originalText,changeText,translateTextObj){
         sendText = translateTextObj.data.sendText;
     }
 
-    firebase.database().ref().child('/'+translateTextObj.id).set({
+    DATABASE.ref(defaultPath).child('/'+translateTextObj.id).set({
         sendText : sendText,
         ja : jaText,
         ko : koText
@@ -150,7 +151,7 @@ function textTranslate(parmas){
                 resolve(translateTextObj.data);
             }
 
-            //firebase.database().ref().on('child_added', function(data) {
+            //DATABASE.ref(defaultPath).on('child_added', function(data) {
             //    var database = data.val();
             //    resolve(database);
             //});
@@ -174,7 +175,7 @@ function textTranslate(parmas){
 
                 }
 
-                firebase.database().ref().child('/').push({
+                DATABASE.ref(defaultPath).child('/').push({
                     sendText : sendText,
                     ja : jaText,
                     ko : koText
