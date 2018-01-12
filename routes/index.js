@@ -1,8 +1,30 @@
 var express = require('express');
 var router = express.Router();
+var translate = require('google-translate-api');
+
+
+/* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
+
+router.get('/translateGoogle', function(req, res, next) {
+    console.log(req.query.text);
+    console.log(req.query.sendLang);
+    console.log(req.query);
+    translate(req.query.text, { to: req.query.resultLang }).then(function (response) {
+        //res.end(response);
+        console.log(response);
+        res.end(JSON.stringify(response));
+        //io.sockets.emit('message',{sendText:req.query.text,translatedText:response.text});
+        ////=> I speak English
+        //console.log(res.from.language.iso);
+        //=> nl
+    }).catch(function (err) {
+        console.error(err);
+    });
+});
+
 
 // 네이버 Papago NMT API 예제
 var client_id = 'vu8G4adE4oGZQHOrDH3C';
@@ -12,8 +34,8 @@ router.get('/translate', function (req, res) {
     console.log(req.query.text);
     console.log(req.query.sendLang);
     console.log(req.query);
-    // var api_url = 'https://openapi.naver.com/v1/language/translate';  // papago smt
-    var api_url = 'https://openapi.naver.com/v1/papago/n2mt';// papago nmt
+    var api_url = 'https://openapi.naver.com/v1/language/translate';  // papago smt
+    // var api_url = 'https://openapi.naver.com/v1/papago/n2mt';// papago nmt
     var request = require('request');
     var options = {
         url: api_url,

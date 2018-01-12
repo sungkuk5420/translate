@@ -2,7 +2,6 @@
  * Created by pc on 2017/06/20.
  */
 var DBData = undefined;
-// Initialize Firebase
 firebase.initializeApp(config);
 
 var BASELANG = 'ko',
@@ -34,7 +33,7 @@ function changeDBText(originalText,changeText,translateTextObj){
         sendText = "";
     if((translateTextObj === undefined) || (translateTextObj === "")){
         var data = getTextData(originalText,'ja');
-         translateTextObj = data.data;
+        translateTextObj = data.data;
         findLang = data.lang;
 
     }
@@ -120,7 +119,7 @@ function textTranslate(parmas){
                         if (canTranslateApi(getTextData(sendText, sendLang).data, resultLang)) {
                             translateAPI(sendText, resultLang, sendLang, function (data) {
                                 var translatedText = data.translatedText;
-                                translateCB(translatedText, resultLang, cb);
+                                translateCB(translatedText, resultLang);
                             });
                         }
 
@@ -131,7 +130,7 @@ function textTranslate(parmas){
 
                 });
 
-                function translateCB(translatedText, resultLang) {
+                function translateCB(translatedText, resultLang,cb) {
 
                     // console.log("sendText : "+ sendText + "translatedText : " + translatedText + "baseLang : " + baseLang);
                     if (resultLang == "ja") {
@@ -398,7 +397,7 @@ function getTextData(sendText,resultLang){
     }
 }
 
-function translateInit(){
+function translateInit(cb){
 
     getDataBase("cbTrue")
         .then(function (DBData) {
@@ -406,6 +405,9 @@ function translateInit(){
             console.log(DBData);
             addClickCss();
             addPopupHTML();
+            if(cb){
+                cb();
+            }
         }, function (error) {
             // 실패시
             console.error(error);
