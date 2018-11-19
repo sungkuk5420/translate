@@ -403,8 +403,8 @@ function translateInit(cb){
         .then(function (DBData) {
             // 성공시
             console.log(DBData);
-            addClickCss();
-            addPopupHTML();
+            // addClickCss();
+            // addPopupHTML();
             if(cb){
                 cb();
             }
